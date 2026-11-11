@@ -7,12 +7,14 @@ export const itemInput = z.object({
   title: z.string().trim().min(1, 'Titel fehlt').max(80),
   category: z.string().trim().min(1).max(40).default('Allgemein'),
   note: z.string().trim().max(500).default(''),
+  rating: z.number().int().min(1, 'Rating muss mindestens 1 sein').max(5, 'Rating darf maximal 5 sein').optional(),
 })
 
 export const itemPatch = z.object({
   title: z.string().trim().min(1).max(80).optional(),
   category: z.string().trim().min(1).max(40).optional(),
   note: z.string().trim().max(500).optional(),
+  rating: z.number().int().min(1).max(5).optional(),
   done: z.boolean().optional(),
 })
 
@@ -24,6 +26,7 @@ export interface Item {
   title: string
   category: string
   note: string
+  rating?: number
   done: boolean
   createdAt: string
 }
